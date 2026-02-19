@@ -1,12 +1,12 @@
 import 'package:book_store_app/providers/view_models_providers.dart';
-import 'package:book_store_app/ui/core/themes/colors.dart';
-import 'package:book_store_app/ui/core/themes/dimens.dart';
+import 'package:book_store_app/core/themes/colors.dart';
+import 'package:book_store_app/core/themes/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../utils/Constants.dart';
-import '../core/strings/strings.dart';
-import '../core/themes/theme.dart';
+import '../../core/strings/strings.dart';
+import '../../core/themes/theme.dart';
+import '../../core/utils/constants.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
@@ -70,15 +70,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         decoration: InputDecoration(
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: AppColors.KabulApprox,
+                              color: AppColors.kabulApprox,
                             ),
                           ),
                           labelText: Strings.emailAddress,
                           labelStyle: AppThemes.regular12.copyWith(
-                            color: AppColors.KabulApprox,
+                            color: AppColors.kabulApprox,
                           ),
                         ),
-                        cursorColor: AppColors.KabulApprox,
+                        cursorColor: AppColors.kabulApprox,
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
                         textCapitalization: TextCapitalization.none,
@@ -99,15 +99,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         decoration: InputDecoration(
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: AppColors.KabulApprox,
+                              color: AppColors.kabulApprox,
                             ),
                           ),
                           labelText: Strings.password,
                           labelStyle: AppThemes.regular12.copyWith(
-                            color: AppColors.KabulApprox,
+                            color: AppColors.kabulApprox,
                           ),
                         ),
-                        cursorColor: AppColors.KabulApprox,
+                        cursorColor: AppColors.kabulApprox,
                         obscureText: true,
                         validator: (value) {
                           if (value == null ||

@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:book_store_app/providers/use_cases_providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 import '../home/home_screen.dart';
 
