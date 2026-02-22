@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/strings/strings.dart';
 import '../home/home_screen.dart';
 
 class AuthViewModel extends AsyncNotifier<User?> {
@@ -19,7 +20,7 @@ class AuthViewModel extends AsyncNotifier<User?> {
     var result = await loginUseCase.execute(email, password);
     if (result != null) {
       state = AsyncData(result);
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
@@ -27,8 +28,8 @@ class AuthViewModel extends AsyncNotifier<User?> {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("You can not login")));
-      state = AsyncValue.error("You can not login", StackTrace.current);
+      ).showSnackBar(SnackBar(content: Text(Strings.loginError)));
+      state = AsyncValue.error(Strings.loginError, StackTrace.current);
     }
   }
 
@@ -51,8 +52,8 @@ class AuthViewModel extends AsyncNotifier<User?> {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("You can not signup")));
-      state = AsyncValue.error("You can not signup", StackTrace.current);
+      ).showSnackBar(SnackBar(content: Text(Strings.signupError)));
+      state = AsyncValue.error(Strings.signupError, StackTrace.current);
     }
   }
 

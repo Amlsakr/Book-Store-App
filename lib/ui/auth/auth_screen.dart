@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/strings/strings.dart';
 import '../../core/themes/theme.dart';
-import '../../core/utils/constants.dart';
+import '../../core/utils/utils.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
@@ -85,7 +85,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
-                              !value.contains(Constants.emailValidation)) {
+                              !value.contains(Utils.emailValidation)) {
                             return Strings.emailValidation;
                           }
                           return null;
@@ -111,7 +111,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         obscureText: true,
                         validator: (value) {
                           if (value == null ||
-                              value.trim().length < Constants.passwordLength) {
+                              value.trim().length < Utils.passwordLength) {
                             return Strings.passwordValidation;
                           }
                           return null;

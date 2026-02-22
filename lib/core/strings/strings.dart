@@ -8,4 +8,9 @@ abstract final class Strings {
   static const String emailValidation = "Please enter a valid email address";
   static const String createAccount = "Create an account";
   static const String haveAccount = "I already have an account.Login";
+  static const String noInternetConnection = "No Internet Connection";
+  static const String serverError = "Server Error";
+  static const String signupError = "You can not signup";
+  static const String loginError = "You can not login";
+  static const String appBarTitle = "Book Store";
 }
