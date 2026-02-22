@@ -1,5 +1,6 @@
 import 'package:book_store_app/domain/use_cases/auth/login_use_case.dart';
 import 'package:book_store_app/domain/use_cases/auth/signup_use_case.dart';
+import 'package:book_store_app/domain/use_cases/home/home_use_case.dart';
 import 'package:book_store_app/providers/repository_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,4 +17,8 @@ final signUpUseCaseProvider = Provider<SignupUseCase>((ref) {
 final getAuthUseCaseStateProvider = Provider<GetAuthStateUseCase>((ref) {
   final repository = ref.watch(authRepositoryProvider);
   return GetAuthStateUseCase(repository);
+});
+final homeUseCaseProvider = Provider<HomeUseCase>((ref) {
+  final repository = ref.watch(homeRepositoryProvider);
+  return HomeUseCase(repository);
 });

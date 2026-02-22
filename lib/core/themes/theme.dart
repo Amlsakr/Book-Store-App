@@ -14,4 +14,7 @@ abstract final class AppThemes {
   static final regular12 = GoogleFonts.poppins(
     textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
   );
+  static final semiBold16 = GoogleFonts.poppins(
+    textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+  );
 }
