@@ -13,4 +13,8 @@ abstract final class Strings {
   static const String signupError = "You can not signup";
   static const String loginError = "You can not login";
   static const String appBarTitle = "Book Store";
+  static const String harryBotter = "Harry Potter";
+  static const String overview = "Overview";
+  static const String noFavorites = "There is no favorites";
+  static const String favoritesBook = "Favorites Book";
 }

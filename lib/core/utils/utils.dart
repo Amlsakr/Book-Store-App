@@ -6,6 +6,7 @@ abstract final class Utils {
   static const baseURL = "https://potterapi-fedeperin.vercel.app/en/books";
   static const headerAcceptKey = "accept";
   static const headerAcceptValue = "application/json";
+  static const bookStoreHiveBox = "Book Store Box";
 
   static Future<bool> isConnected() async {
     final Connectivity connectivity = Connectivity();
