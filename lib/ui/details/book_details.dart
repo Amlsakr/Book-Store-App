@@ -1,6 +1,7 @@
 import 'package:book_store_app/core/strings/strings.dart';
 import 'package:book_store_app/core/themes/colors.dart';
 import 'package:book_store_app/providers/use_cases_providers.dart';
+import 'package:book_store_app/providers/view_models_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,6 +47,7 @@ class _BookDetails extends ConsumerState<BookDetails> {
                   );
                 });
               }
+              ref.invalidate(favoritesViewModelProvide);
             },
             icon: isFavorite
                 ? Icon(Icons.bookmark_add, color: Colors.white)

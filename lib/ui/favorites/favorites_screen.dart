@@ -1,4 +1,5 @@
 import 'package:book_store_app/providers/use_cases_providers.dart';
+import 'package:book_store_app/providers/view_models_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,9 +14,9 @@ class FavoritesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoriteList = ref.watch(favoritesUseCaseProvider);
-    var books = favoriteList.getFavorites();
-    var content = (books.isNotEmpty)
+    final favoriteList = ref.watch(favoritesViewModelProvide);
+    var books = favoriteList.value;
+    var content = (books!.isNotEmpty)
         ? ListView.builder(
             itemCount: books.length,
             itemBuilder: (context, index) {

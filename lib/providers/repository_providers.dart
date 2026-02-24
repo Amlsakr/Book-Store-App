@@ -18,6 +18,6 @@ final homeRepositoryProvider = Provider<HomeRepository>((ref) {
 });
 
 final favoritesRepositoryProvider = Provider<FavoritesRepository>((ref) {
-  final favoritesLocalDataSource = ref.read(favoritesLocalDataSourceProvider);
+  final favoritesLocalDataSource = ref.watch(favoritesLocalDataSourceProvider);
   return FavoriteRepositoryImpl(favoritesLocalDataSource);
 });
