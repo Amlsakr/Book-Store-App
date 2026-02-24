@@ -1,6 +1,6 @@
-import 'package:book_store_app/providers/view_models_providers.dart';
 import 'package:book_store_app/core/themes/colors.dart';
 import 'package:book_store_app/core/themes/dimens.dart';
+import 'package:book_store_app/providers/view_models_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,9 +50,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authViewModelProvider);
-
+    var currentMode = MediaQuery.platformBrightnessOf(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: currentMode == Brightness.light
+          ? Colors.white
+          : Colors.black,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -60,7 +62,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               Image.asset('assets/images/stack_books.png'),
               Card(
                 margin: const EdgeInsets.all(Dimens.padding20),
-                color: AppColors.bizarreApprox,
+                color: currentMode == Brightness.light
+                    ? AppColors.bizarreApprox
+                    : Colors.black,
                 child: Form(
                   key: _formKey,
                   child: Column(

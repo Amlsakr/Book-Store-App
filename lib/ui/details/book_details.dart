@@ -25,6 +25,7 @@ class _BookDetails extends ConsumerState<BookDetails> {
   Widget build(BuildContext context) {
     final favoriteUseCase = ref.watch(favoritesUseCaseProvider);
     var isFavorite = favoriteUseCase.isFavorite(widget.book.title ?? "");
+    var currentMode = MediaQuery.platformBrightnessOf(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.chestnutRoseApprox,
@@ -56,13 +57,15 @@ class _BookDetails extends ConsumerState<BookDetails> {
         ],
       ),
 
-      backgroundColor: Colors.white,
+      backgroundColor: currentMode == Brightness.light
+          ? Colors.white
+          : Colors.black,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(Dimens.padding8),
               child: Center(
                 child: Image.network(
                   widget.book.cover ?? "",
@@ -98,7 +101,9 @@ class _BookDetails extends ConsumerState<BookDetails> {
               child: Text(
                 widget.book.title ?? "",
                 style: AppThemes.semiBold18.copyWith(
-                  color: AppColors.sharkApprox,
+                  color: currentMode == Brightness.light
+                      ? AppColors.sharkApprox
+                      : Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -122,17 +127,22 @@ class _BookDetails extends ConsumerState<BookDetails> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              padding: const EdgeInsets.only(
+                left: Dimens.padding8,
+                right: Dimens.padding8,
+              ),
               child: Text(
                 Strings.overview,
                 style: AppThemes.semiBold18.copyWith(
-                  color: AppColors.sharkApprox,
+                  color: currentMode == Brightness.light
+                      ? AppColors.sharkApprox
+                      : Colors.white,
                 ),
                 textAlign: TextAlign.start,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(Dimens.padding8),
               child: Text(
                 widget.book.description ?? "",
                 style: AppThemes.regular14.copyWith(

@@ -1,3 +1,4 @@
+import 'package:book_store_app/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,5 +23,33 @@ abstract final class AppThemes {
   );
   static final medium16 = GoogleFonts.poppins(
     textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+  );
+  static final lightTheme = ThemeData(
+    brightness: Brightness.light,
+    // scaffoldBackgroundColor: Colors.white,
+    // primaryColor: AppColors.chestnutRoseApprox,
+    //
+    // appBarTheme: const AppBarTheme(
+    //   backgroundColor: AppColors.chestnutRoseApprox,
+    //   foregroundColor: Colors.white,
+    // ),
+    // colorScheme: const ColorScheme.light(
+    //   primary: AppColors.chestnutRoseApprox,
+    //   secondary: AppColors.kabulApprox,
+    // ),
+  );
+
+  static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    // scaffoldBackgroundColor: AppColors.sharkApprox,
+    // primaryColor: AppColors.chestnutRoseApprox,
+    // appBarTheme: const AppBarTheme(
+    //   backgroundColor: AppColors.sharkApprox,
+    //   foregroundColor: Colors.white,
+    // ),
+    // colorScheme: const ColorScheme.dark(
+    //   primary: AppColors.chestnutRoseApprox,
+    //   secondary: AppColors.silverChaliceApprox,
+    // ),
   );
 }
