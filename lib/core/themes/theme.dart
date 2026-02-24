@@ -17,4 +17,10 @@ abstract final class AppThemes {
   static final semiBold16 = GoogleFonts.poppins(
     textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
   );
+  static final semiBold18 = GoogleFonts.poppins(
+    textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+  );
+  static final medium16 = GoogleFonts.poppins(
+    textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+  );
 }
