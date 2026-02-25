@@ -1,3 +1,4 @@
+import 'package:book_store_app/core/data/api_response.dart';
 import 'package:book_store_app/core/themes/colors.dart';
 import 'package:book_store_app/core/themes/dimens.dart';
 import 'package:book_store_app/providers/view_models_providers.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/strings/strings.dart';
 import '../../core/themes/theme.dart';
-import '../../core/utils/utils.dart';
+import '../../core/utils/auth_validators.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
@@ -41,10 +42,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<User?>>(authViewModelProvider, (previous, next) {
+    ref.listen<AsyncValue<ApiResponse<User?>>>(authViewModelProvider, (
+      previous,
+      next,
+    ) {
       next.whenOrNull(
         data: (user) {
-          if (user != null) {
+          if (user.data != null) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -96,10 +100,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         autocorrect: false,
                         textCapitalization: TextCapitalization.none,
                         validator: (value) {
-                          if (value == null ||
-                              value.trim().isEmpty ||
-                              !value.contains(Utils.emailValidation)) {
-                            return Strings.emailValidation;
+                          var validationResult = AuthValidators.validateEmail(
+                            value,
+                          );
+                          if (validationResult != null) {
+                            return validationResult;
                           }
                           return null;
                         },
@@ -123,9 +128,10 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                         cursorColor: AppColors.kabulApprox,
                         obscureText: true,
                         validator: (value) {
-                          if (value == null ||
-                              value.trim().length < Utils.passwordLength) {
-                            return Strings.passwordValidation;
+                          var validationResult =
+                              AuthValidators.validatePassword(value);
+                          if (validationResult != null) {
+                            return validationResult;
                           }
                           return null;
                         },

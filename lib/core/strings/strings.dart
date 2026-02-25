@@ -17,4 +17,6 @@ abstract final class Strings {
   static const String overview = "Overview";
   static const String noFavorites = "There is no favorites";
   static const String favoritesBook = "Favorites Book";
+  static const String emailCannotBeEmpty = "Email cannot be empty";
+  static const String passwordCannotBeEmpty = "'Password cannot be empty'";
 }

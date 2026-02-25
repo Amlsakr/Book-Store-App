@@ -38,8 +38,8 @@ class AuthGate extends ConsumerWidget {
     var authState = ref.watch(authViewModelProvider);
     return authState.when(
       data: (user) {
-        print("AuthGate State: ${user?.email}");
-        if (user != null) return HomeScreen();
+        print("AuthGate State: ${user.data?.email}");
+        if (user.data != null) return HomeScreen();
         return SplashScreen();
       },
       error: (error, stackTrace) =>
