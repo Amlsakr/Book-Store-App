@@ -15,6 +15,4 @@ final homeViewModelProvider =
       return HomeViewModel();
     });
 final favoritesViewModelProvide =
-    AsyncNotifierProvider<FavoritesViewModel, List<Book>>(() {
-      return FavoritesViewModel();
-    });
+    NotifierProvider<FavoritesViewModel, List<Book>>(FavoritesViewModel.new);

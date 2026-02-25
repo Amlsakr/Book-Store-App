@@ -1,6 +1,5 @@
 import 'package:book_store_app/core/strings/strings.dart';
 import 'package:book_store_app/core/themes/colors.dart';
-import 'package:book_store_app/providers/use_cases_providers.dart';
 import 'package:book_store_app/providers/view_models_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,22 +8,16 @@ import '../../core/themes/dimens.dart';
 import '../../core/themes/theme.dart';
 import '../../data/model/book.dart';
 
-class BookDetails extends ConsumerStatefulWidget {
+class BookDetails extends ConsumerWidget {
   const BookDetails({super.key, required this.book});
 
   final Book book;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() {
-    return _BookDetails();
-  }
-}
-
-class _BookDetails extends ConsumerState<BookDetails> {
-  @override
-  Widget build(BuildContext context) {
-    final favoriteUseCase = ref.watch(favoritesUseCaseProvider);
-    var isFavorite = favoriteUseCase.isFavorite(widget.book.title ?? "");
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favorites = ref.watch(favoritesViewModelProvide);
+    final viewModel = ref.read(favoritesViewModelProvide.notifier);
+    var isFavorite = favorites.any((b) => b.title == book.title);
     var currentMode = MediaQuery.platformBrightnessOf(context);
     return Scaffold(
       appBar: AppBar(
@@ -32,23 +25,8 @@ class _BookDetails extends ConsumerState<BookDetails> {
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: () async {
-              if (isFavorite) {
-                await favoriteUseCase.removeFavorites(widget.book.title ?? "");
-                setState(() {
-                  isFavorite = favoriteUseCase.isFavorite(
-                    widget.book.title ?? "",
-                  );
-                });
-              } else {
-                await favoriteUseCase.addToFavorites(widget.book);
-                setState(() {
-                  isFavorite = favoriteUseCase.isFavorite(
-                    widget.book.title ?? "",
-                  );
-                });
-              }
-              ref.invalidate(favoritesViewModelProvide);
+            onPressed: () {
+              viewModel.toggleFavorite(book);
             },
             icon: isFavorite
                 ? Icon(Icons.bookmark_add, color: Colors.white)
@@ -68,7 +46,7 @@ class _BookDetails extends ConsumerState<BookDetails> {
               padding: const EdgeInsets.all(Dimens.padding8),
               child: Center(
                 child: Image.network(
-                  widget.book.cover ?? "",
+                  book.cover ?? "",
                   fit: BoxFit.cover,
                   height: Dimens.imageHeight,
                   loadingBuilder: (context, child, loadingProgress) {
@@ -99,7 +77,7 @@ class _BookDetails extends ConsumerState<BookDetails> {
             ),
             Center(
               child: Text(
-                widget.book.title ?? "",
+                book.title ?? "",
                 style: AppThemes.semiBold18.copyWith(
                   color: currentMode == Brightness.light
                       ? AppColors.sharkApprox
@@ -119,7 +97,7 @@ class _BookDetails extends ConsumerState<BookDetails> {
             ),
             Center(
               child: Text(
-                widget.book.releaseDate ?? "",
+                book.releaseDate ?? "",
                 style: AppThemes.medium16.copyWith(
                   color: AppColors.silverChaliceApprox,
                 ),
@@ -144,7 +122,7 @@ class _BookDetails extends ConsumerState<BookDetails> {
             Padding(
               padding: const EdgeInsets.all(Dimens.padding8),
               child: Text(
-                widget.book.description ?? "",
+                book.description ?? "",
                 style: AppThemes.regular14.copyWith(
                   color: AppColors.silverChaliceApprox,
                 ),

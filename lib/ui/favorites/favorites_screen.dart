@@ -16,13 +16,12 @@ class FavoritesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteList = ref.watch(favoritesViewModelProvide);
     var currentMode = MediaQuery.platformBrightnessOf(context);
-    var books = favoriteList.value;
-    var content = (books!.isNotEmpty)
+    var content = (favoriteList.isNotEmpty)
         ? ListView.builder(
-            itemCount: books.length,
+            itemCount: favoriteList.length,
             itemBuilder: (context, index) {
               return BookItem(
-                book: books[index],
+                book: favoriteList[index],
                 onSelectBook: (Book book) {
                   Navigator.push(
                     context,

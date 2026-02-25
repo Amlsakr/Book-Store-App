@@ -1,6 +1,8 @@
 import 'package:book_store_app/core/themes/colors.dart';
 import 'package:book_store_app/core/themes/dimens.dart';
 import 'package:book_store_app/providers/view_models_providers.dart';
+import 'package:book_store_app/ui/home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +25,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   var _enteredEmail = '';
   var _enteredPassword = '';
 
-  void _submit(WidgetRef ref) async {
+  void _submit() async {
     var authViewModel = ref.read(authViewModelProvider.notifier);
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
@@ -31,24 +33,31 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     }
     _formKey.currentState!.save();
     if (_isLogin) {
-      await authViewModel.login(
-        _enteredEmail.trim(),
-        _enteredPassword.trim(),
-        ref,
-        context,
-      );
+      await authViewModel.login(_enteredEmail.trim(), _enteredPassword.trim());
     } else {
-      await authViewModel.signup(
-        _enteredEmail.trim(),
-        _enteredPassword.trim(),
-        ref,
-        context,
-      );
+      await authViewModel.signup(_enteredEmail.trim(), _enteredPassword.trim());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<AsyncValue<User?>>(authViewModelProvider, (previous, next) {
+      next.whenOrNull(
+        data: (user) {
+          if (user != null) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          }
+        },
+        error: (error, _) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(error.toString())));
+        },
+      );
+    });
     final authState = ref.watch(authViewModelProvider);
     var currentMode = MediaQuery.platformBrightnessOf(context);
     return Scaffold(
@@ -132,7 +141,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       else
                         ElevatedButton(
                           onPressed: () {
-                            _submit(ref);
+                            _submit();
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
