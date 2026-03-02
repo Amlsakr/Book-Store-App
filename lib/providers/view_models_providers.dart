@@ -6,15 +6,14 @@ import 'package:book_store_app/ui/home/home_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final authViewModelProvider = AsyncNotifierProvider<AuthViewModel, User?>(() {
-  return AuthViewModel();
-});
+final authViewModelProvider =
+    AsyncNotifierProvider<AuthViewModel, ApiResponse<User?>>(() {
+      return AuthViewModel();
+    });
 
 final homeViewModelProvider =
     AsyncNotifierProvider<HomeViewModel, ApiResponse<List<Book>>>(() {
       return HomeViewModel();
     });
 final favoritesViewModelProvide =
-    AsyncNotifierProvider<FavoritesViewModel, List<Book>>(() {
-      return FavoritesViewModel();
-    });
+    NotifierProvider<FavoritesViewModel, List<Book>>(FavoritesViewModel.new);
